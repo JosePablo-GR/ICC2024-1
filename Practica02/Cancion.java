@@ -2,10 +2,8 @@ public class Cancion{
 
 	public static void main(String[] args){
 
-		String vacio = "";
-		String numbers = "0123456789";
-
-		String firstDay = "a partridge in a pear tree";
+		String primerDia = "a partridge in a pear tree";
+		String firstDay = "and a partridge in a pear tree";
 		String secondDay = "Two turtle doves";
 		String thirdDay = "Three French hens,";
 		String fourthDay = "Four calling birds,";
@@ -18,24 +16,34 @@ public class Cancion{
 		String eleventhDay = "Eleven pipers piping,";
 		String twelvethDay = "Twelve drummers drumming,";
 
-		int valorChar;
+		for (int i = 1; i <= 12; i++){
 
-		System.out.println("long: " + numbers.length());
+			for (int j = i; j >= 1; j--){
 
-		for(int i = 9; i < numbers.length(); i--){
-
-			char c = numbers.charAt(i);
-			valorChar = Character.getNumericValue(c);
-
-			switch(valorChar){
+				switch(j){
 
 			case 1:
 
-				System.out.println(firstDay);
+				if(i == 1){
+
+					System.out.println("On the first day of Christmas, my true love sent to me \n" + primerDia);
+
+
+				} else {
+
+					System.out.println(firstDay);
+
+				}
 
 				break;
 
 			case 2:
+
+				if(i == 2){
+
+					System.out.println("On the second day of Christmas, my true love sent to me");
+
+				}
 
 				System.out.println(secondDay);
 
@@ -43,11 +51,23 @@ public class Cancion{
 
 			case 3:
 
+				if(i == 3){
+
+					System.out.println("On the third day of Christmas, my true love sent to me");
+
+				}
+
 				System.out.println(thirdDay);
 
 				break;
 
 			case 4:
+
+				if(i == 4){
+
+					System.out.println("On the fourth day of Christmas, my true love sent to me");
+
+				}
 
 				System.out.println(fourthDay);
 
@@ -55,11 +75,23 @@ public class Cancion{
 
 			case 5:
 
+				if(i == 5){
+
+					System.out.println("On the fifth day of Christmas, my true love sent to me");
+
+				}
+
 				System.out.println(fifthDay);
 
 				break;
 
 			case 6:
+
+				if(i == 6){
+
+					System.out.println("On the sixth day of Christmas, my true love sent to me");
+
+				}
 
 				System.out.println(sixthDay);
 
@@ -67,11 +99,23 @@ public class Cancion{
 
 			case 7:
 
+				if(i == 7){
+
+					System.out.println("On the seventh day of Christmas, my true love sent to me");
+
+				}
+
 				System.out.println(seventhDay);
 
 				break;
 
 			case 8:
+
+				if(i == 8){
+
+					System.out.println("On the eighth day of Christmas, my true love sent to me");
+
+				}
 
 				System.out.println(eighthDay);
 
@@ -79,35 +123,71 @@ public class Cancion{
 
 			case 9:
 
+				if(i == 9){
+
+					System.out.println("On the ninth day of Christmas, my true love sent to me");
+
+				}
+
 				System.out.println(ninthDay);
 
 				break;
 
 			case 10:
 
+				if(i == 10){
+
+					System.out.println("On the tenth day of Christmas, my true love sent to me");
+
+				}
+
+				System.out.println(tenthDay);
+
 				break;
 
 			case 11:
+
+				if(i == 11){
+
+					System.out.println("On the eleventh day of Christmas, my true love sent to me");
+
+				}
+
+				System.out.println(eleventhDay);
 
 				break;
 
 			case 12:
 
+				if(i == 12){
+
+					System.out.println("On the twelveth day of Christmas, my true love sent to me");
+					System.out.println(twelvethDay);
+
+				} else {
+
+					System.out.println(twelvethDay);
+
+				}
+
 				break;
 
-			}
+			}//Fin switch
+              
+             }
 
-			/*
-			if(valorChar == i){
+             if(i == 12){
 
-				//System.out.println("valor i: " + i);
-				//System.out.println("valor char: " + valorChar);
-				//System.out.println(valorChar);
+             	System.out.print("!");
+             	System.out.println();
 
-			}
-			*/
+             } else {
 
-		}
+             	System.out.println();
+
+             }
+
+         }
 
 	}
 
