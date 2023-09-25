@@ -41,7 +41,7 @@ public class Ahorcado{
 
 	} else if(random == 8){
 
-		pelicula = "lilo y Stitch";
+		pelicula = "lilo y stitch";
 
 	} else if(random == 9){
 
@@ -74,6 +74,28 @@ public class Ahorcado{
 		}
 
 		return espacios;	
+
+	}
+
+	public static String respuesta(String pelicula){
+
+		String resp = "";
+
+		for(int a = 0; a < pelicula.length(); a++){
+
+			if(pelicula.charAt(a) != ' '){
+
+				resp = resp + pelicula.charAt(a) + " ";
+
+			} else if (pelicula.charAt(a) == ' '){
+
+				resp += "  ";
+
+			}
+
+		}
+
+		return resp;
 
 	}
 
@@ -112,28 +134,61 @@ public class Ahorcado{
 
 	}
 
-	public static String rayitasLetras(String cadena1, String cadena2){
+	public static String rayitasLetras(String pelicula, String cadenaLetras) {
+    
+    boolean encontrado;
+    String palabraFinal = "";
 
-		String palabra = "";
-		String blankSpace = "  ";
-		String rayitas = "_ ";
+    for(int i = 0; i < pelicula.length(); i++){
 
+       encontrado = false;
 
-		for(int i = 0; i < cadena2.length(); i++){
+        for(int j = 0; j < cadenaLetras.length(); j++){
 
-			for(int j = 0; j < cadena1.length(); j++){
+            if(pelicula.charAt(i) == cadenaLetras.charAt(j)){
 
-				if(cadena2.charAt(i) == cadena1.charAt(j)){
+                palabraFinal += cadenaLetras.charAt(j) + " ";
+                encontrado = true;
+                break;
 
-					palabra += cadena2.charAt(j);
+            }
+        }
 
-				}
+        if(!encontrado && pelicula.charAt(i) != ' '){
+
+            palabraFinal += "_ ";
+
+        } else if (pelicula.charAt(i) == ' '){
+
+            palabraFinal += "  ";
+
+        }
+        
+    }
+
+    return palabraFinal;
+	
+	}
+
+	public static boolean letraContenida(String letrasUsadas, char l){
+
+		boolean esta = false;
+
+		for(int f = 0; f < letrasUsadas.length(); f++){
+
+			if(letrasUsadas.charAt(f) == l){
+
+				esta = true;
+
+			} else {
+
+				esta = false;
 
 			}
 
 		}
 
-		return palabra;
+		return esta;
 
 	}
 
@@ -143,8 +198,8 @@ public static void main(String[] args){
 	Scanner t = new Scanner(System.in);
 	int quePelicula;
 	int opcionUsuario;
-	int contCompu = 0;
-	int contJugador = 0;
+	byte contCompu = 0;
+	byte contJugador = 0;
 
 	System.out.println("Bienvenido al juego de El Ahorcado");
 	System.out.print("\nPor favor ingresa tu nombre: ");
@@ -165,9 +220,6 @@ public static void main(String[] args){
 		System.out.println("3. Salir");
 		opcionUsuario = t.nextInt();
 
-		byte usuarioG;
-		byte compuG;
-
 		switch(opcionUsuario){
 
 		case 1:
@@ -176,22 +228,141 @@ public static void main(String[] args){
 
 			contadorJ = contadorJ+1;
 
-			System.out.println("Debes ingresar solo una letra, sin acentos");
+			System.out.println("\nDebes ingresar solo una letra, sin acentos");
 			System.out.println("La película que tienes que adivinar es la siguiente:");
-			System.out.println(pelicula); ////////////////////QUITAR ////////////////////
 			System.out.println(imprimeRayitas(pelicula));
-			System.out.println();
+			String answer = respuesta(pelicula);
+
+			boolean contenido;
+			int contadorMonito = 0;
+			String letrasUsadas = "";
 
 			while(perder > 0){
 
-				System.out.println("Ingresa una letra");
-				char letra = t.next().charAt(0);
+				contenido = false;
+
+				System.out.println("\nIngresa una letra");
+				String frase = "ponganme 10 pls";
+
+				while(frase.length() > 1){
+
+					frase = t.next();
+
+					if(frase.length() > 1){
+
+						System.out.println("\nIngresa un caracter a la vez");
+
+					}
+
+				}
+
+				char letra = frase.charAt(0);
 				
 				String cadena = completa(pelicula,letra);
 
-				System.out.println(cadena); /////////QUITAR /////////
+				for(int i = 0; i < pelicula.length(); i++){
+
+					if(pelicula.charAt(i) == letra){
+
+						contenido = true;
+
+					}
 
 				}
+
+				if(!contenido){
+
+					System.out.println("'" + letra + "' no forma parte de la palabra");
+					perder--;
+					contadorMonito++;
+
+						switch(contadorMonito){
+
+							case 6:
+
+								System.out.println();
+								System.out.println("\t 0");
+								System.out.println("\tl|l");
+								System.out.println("\td b");
+								System.out.println("\nHas perdido la partida. Punto para la computadora");
+								contCompu++;
+
+								System.out.println("La película que no adiviniste era: " + pelicula);
+
+								break;
+
+							case 5:
+
+								System.out.println();
+								System.out.println("\t 0");
+								System.out.println("\tl|l");
+								System.out.println("\td ");
+
+								break;
+
+							case 4:
+
+								System.out.println();
+								System.out.println("\t 0");
+								System.out.println("\tl|l");
+
+								break;
+
+							case 3:
+
+								System.out.println();
+								System.out.println("\t 0");
+								System.out.println("\tl|");
+
+								break;
+
+							case 2:
+
+								System.out.println();
+								System.out.println("\t 0");
+								System.out.println("\tl");
+
+								break;
+
+							case 1:
+
+								System.out.println();
+								System.out.println("\t 0");
+
+								break;
+
+						}
+
+				} else {
+
+						if(!(letraContenida(letrasUsadas,letra))){
+
+						letrasUsadas += letra;
+
+						}
+
+					String juegoUsuario = rayitasLetras(pelicula,letrasUsadas);
+
+					System.out.println();
+					System.out.println(juegoUsuario);
+
+					//System.out.println("answer de '" + pelicula + "': " + answer);
+
+					if(juegoUsuario.equals(answer)){
+
+						perder = 0;
+						System.out.println("\n¡" + nombre + " has ganado la partida! Punto para ti");
+						contJugador++;
+
+						break;
+
+					}
+
+					}
+
+				//}
+
+			}//Fin while ciclo
 
 			break;
 
@@ -203,9 +374,10 @@ public static void main(String[] args){
 
 			} else {
 
+				System.out.println("");
 				System.out.println("Total de juegos: " + contadorJ);
 				System.out.println("Victorias de " + nombre + ": " +  contJugador);
-				System.out.println("Victorias de la computadora : " + contCompu);
+				System.out.println("Victorias de la computadora: " + contCompu);
 
 			}
 
